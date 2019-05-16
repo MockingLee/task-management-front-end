@@ -34,7 +34,7 @@
             
                <span v-if="collapsed" class="system-name">{{systemName}}</span>            
           </el-col>
-          <el-col :span="15" :offset="15"><span v-on:click="login"><i class="fa fa-sign-out"></i></span></el-col>
+          <el-col :span="15" :offset="15"><span class="system-name">{{userName}}</span><span v-on:click="logout"><i class="fa fa-sign-out"></i></span></el-col>
         </el-row>
       </el-header>
       <!--中间-->
@@ -57,7 +57,7 @@ let data = () => {
   return {
     collapsed: false,
     systemName: '任务管理',
-    userName: '系统管理员',
+    userName: JSON.parse(localStorage.token).username , 
     filters: {},
     rows: []
     
@@ -98,8 +98,10 @@ export default {
     handleDelete,
     //获取分页
     getRows,
-    login() {
-      this.$router.push("/Main");
+    logout() {
+      console.log(localStorage)
+      localStorage.removeItem('token')
+      this.$router.push("/login");
     },
     home() {
       this.$router.push("/manage");

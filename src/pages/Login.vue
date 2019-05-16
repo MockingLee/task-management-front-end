@@ -36,7 +36,7 @@
           type="danger" 
           class="submitBtn"
           round
-          @click.native.prevent="submit"
+          @click="submitForm('LoginForm')"
           :loading="logining">
           登录
         </el-button>
@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import api from '../axios'
+
 export default {
   // ....
   data () {
@@ -68,7 +70,7 @@ export default {
           {
             required: true,
             max: 14,
-            min: 7,
+            min: 3,
             message: '用户名长度为7-14位',
             trigger: 'blur'
           }
@@ -85,11 +87,33 @@ export default {
   },
   methods: {
     // ...
-    submit () {
+    submitForm () {
       this.$refs.LoginForm.validate(valid => {
         if (valid) {
           this.logining = true
           console.log('开始请求后台数据，验证返回之类的操作！')
+          let opt = this.LoginForm;
+          api.UserLogin(opt).then(({
+            data
+          }) => {
+            console.log(data)
+            if (data.success) {
+               this.$message({
+                                type: 'success',
+                                message: '登录成功'
+                            })
+                            localStorage.setItem('token', JSON.stringify(data.info))
+                            
+                            location.replace('/index')
+            }else {
+              this.$message({
+                                type: 'info',
+                                message: '登录失败'
+                            })
+                            this.logining = false
+            }
+          })
+          
         } else {
           console.log('submit err')
         }
