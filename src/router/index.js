@@ -1,7 +1,7 @@
 
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/pages/Login'
+import Main from '@/pages/Main'
 import Dashboard from '@/pages/Dashboard'
 import index from '@/pages/index'
 import table from '@/pages/table'
@@ -14,12 +14,12 @@ var router = new Router({
   routes: [
     {
       path: '/',
-      redirect: 'Login'
+      redirect: 'Main'
     },
     {
-      path: '/Login',
-      name: 'Login',
-      component: resolve => require(['../pages/Login'], resolve),
+      path: '/Main',
+      name: 'Main',
+      component: resolve => require(['../pages/Main'], resolve),
      
     },
     {
@@ -45,21 +45,12 @@ var router = new Router({
       ]
     },
     {
-      path: '/table',
-      name: 'table',
-      component: resolve => require(['../pages/table'], resolve),
+      path: '/test1',
+      name: 'test1',
+      component: resolve => require(['../pages/test'], resolve),
     }
   ]
 })
-
-router.beforeEach((to, from, next) => {
-  if (to.path !== '/Login' && !localStorage.token) {
-    return next('/Login')
-  }
-   next()
-})
-
-
  
 
 export default router

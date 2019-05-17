@@ -28,13 +28,19 @@
     <el-container>
       <!--页眉-->
       <el-header class="header">
-        <el-row>
-          
-          <el-col :span="18" class="header-title">       
-            
+        <el-row>          
+          <el-col :span="18" class="header-title">                   
                <span v-if="collapsed" class="system-name">{{systemName}}</span>            
           </el-col>
-          <el-col :span="15" :offset="15"><span class="system-name">{{userName}}</span><span v-on:click="logout"><i class="fa fa-sign-out"></i></span></el-col>
+          <el-col :span="6" :offset="18">
+            <span v-on:click="home">
+               <i class="fa fa-home" aria-hidden="true"></i>
+            </span>
+            &emsp;
+            <span v-on:click="login">
+               <i class="fa fa-sign-out"></i>
+            </span>
+          </el-col>
         </el-row>
       </el-header>
       <!--中间-->
@@ -42,9 +48,7 @@
         <hr>
         <router-view></router-view>
       </el-main>
-  
-       
-      </el-main>
+ 
     </el-container>
   </el-container>
   
@@ -57,7 +61,7 @@ let data = () => {
   return {
     collapsed: false,
     systemName: '任务管理',
-    userName: JSON.parse(localStorage.token).username , 
+    userName: '系统管理员',
     filters: {},
     rows: []
     
@@ -98,10 +102,8 @@ export default {
     handleDelete,
     //获取分页
     getRows,
-    logout() {
-      console.log(localStorage)
-      localStorage.removeItem('token')
-      this.$router.push("/login");
+    login() {
+      this.$router.push("/Main");
     },
     home() {
       this.$router.push("/manage");
