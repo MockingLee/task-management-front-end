@@ -5,6 +5,7 @@ import Login from '@/pages/Login'
 import Dashboard from '@/pages/Dashboard'
 import index from '@/pages/index'
 import table from '@/pages/table'
+import page from '@/pages/page'
 
 Vue.use(Router)
  
@@ -48,16 +49,21 @@ var router = new Router({
       path: '/table',
       name: 'table',
       component: resolve => require(['../pages/table'], resolve),
+    },
+    {
+      path: '/page',
+      name: 'page',
+      component: resolve => require(['../pages/page'], resolve),
     }
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path !== '/Login' && !localStorage.token) {
-    return next('/Login')
-  }
-   next()
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.path !== '/Login' && !localStorage.token) {
+//     return next('/Login')
+//   }
+//    next()
+// })
 
 
  
