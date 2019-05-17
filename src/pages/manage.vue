@@ -41,9 +41,7 @@
       <el-main class="main">
         <hr>
         <router-view></router-view>
-      </el-main>
-  
-       
+      </el-main> 
       </el-main>
     </el-container>
   </el-container>
