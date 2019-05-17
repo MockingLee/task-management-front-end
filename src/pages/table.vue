@@ -35,10 +35,12 @@
     </el-table-column>
     <el-table-column label="操作">
       <template slot-scope="scope">
+       <!--
        <el-button
          size="mini"
          type="primary"
          @click="submit">编辑</el-button>
+         -->
        <el-button
          size="mini"
          type="danger"
@@ -64,9 +66,89 @@
 <script>
 
 let productList = [];
-for (let i = 0; i < 99; i++) {
+
     productList.push({
-        name: '王小虎',
+    name: '王小虎',
+    title: 'hhh',
+    date: '2018-05-02',
+    date2: '2018-07-04',
+    process: '50%',
+    content: 'hhhhhh'
+    });
+    productList.push({
+    name: '王小虎2',
+    title: 'hhh',
+    date: '2018-05-02',
+    date2: '2018-07-04',
+    process: '50%',
+    content: 'hhhhhh'
+    });
+    productList.push({
+    name: '王小虎',
+    title: 'hhh',
+    date: '2018-05-02',
+    date2: '2018-07-04',
+    process: '50%',
+    content: 'hhhhhh'
+    });
+    productList.push({
+    name: '王小虎',
+    title: 'hhh',
+    date: '2018-05-02',
+    date2: '2018-07-04',
+    process: '50%',
+    content: 'hhhhhh'
+    });
+    productList.push({
+    name: '王小虎',
+    title: 'hhh',
+    date: '2018-05-02',
+    date2: '2018-07-04',
+    process: '50%',
+    content: 'hhhhhh'
+    });
+    productList.push({
+    name: '王小虎',
+    title: 'hhh',
+    date: '2018-05-02',
+    date2: '2018-07-04',
+    process: '50%',
+    content: 'hhhhhh'
+    });
+    productList.push({
+    name: '王小虎',
+    title: 'hhh',
+    date: '2018-05-02',
+    date2: '2018-07-04',
+    process: '50%',
+    content: 'hhhhhh'
+    });
+    productList.push({
+    name: '王小虎',
+    title: 'hhh',
+    date: '2018-05-02',
+    date2: '2018-07-04',
+    process: '50%',
+    content: 'hhhhhh'
+    });
+    productList.push({
+    name: '王小虎',
+    title: 'hhh',
+    date: '2018-05-02',
+    date2: '2018-07-04',
+    process: '50%',
+    content: 'hhhhhh'
+    });
+    productList.push({
+    name: '王小虎',
+    title: 'hhh',
+    date: '2018-05-02',
+    date2: '2018-07-04',
+    process: '50%',
+    content: 'hhhhhh'
+    });
+    productList.push({
+    name: '王小虎4',
     title: 'hhh',
     date: '2018-05-02',
     date2: '2018-07-04',
@@ -74,7 +156,7 @@ for (let i = 0; i < 99; i++) {
     content: 'hhhhhh'
     });
 
-}
+
 
 export default {
   data() {
