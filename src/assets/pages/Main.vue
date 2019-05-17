@@ -49,8 +49,6 @@
 </template>
 
 <script>
-import api from '../axios'
-
 export default {
   // ....
   data () {
@@ -82,7 +80,7 @@ export default {
   },
   methods: {
     // ...
-    submitForm () {
+    submit () {
       this.$refs.LoginForm.validate(valid => {
         if (valid) {
           this.logining = true

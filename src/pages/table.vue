@@ -1,13 +1,9 @@
 <template>
+<section>
 <el-table :data="rows" style="width: 100%" stripe border>
     <el-table-column label="姓名" width="80" :show-overflow-tooltip="true" align="center">
       <template slot-scope="scope">
-       <el-popover trigger="hover" placement="top">
-         <p>姓名: {{ scope.row.name }}</p>
-         <div slot="reference" class="name-wrapper">
-           <span size="medium">{{ scope.row.name }}</span>
-         </div>
-       </el-popover>
+       <span size="medium">{{ scope.row.name }}</span>      
      </template>
     </el-table-column>
     <el-table-column prop="title" label="标题" width="120" align="center" >
@@ -32,7 +28,7 @@
       <span size="medium">{{ scope.row.process }}</span>
       </template>
     </el-table-column>
-    <el-table-column prop="content" label="描述" width="500" align="center" >
+    <el-table-column prop="content" label="描述" width="400" align="center" >
       <template slot-scope="scope">
         <span size="medium">{{ scope.row.content }}</span>
       </template>
@@ -42,161 +38,127 @@
        <el-button
          size="mini"
          type="primary"
-         @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+         @click="submit">编辑</el-button>
        <el-button
          size="mini"
          type="danger"
-         @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+         @click="open">删除</el-button>
       </template>
     </el-table-column>
 </el-table>
-
+<!--底部-->
+  <el-col :span="24" class="toolbar">
+    <footer>
+            <button @click="prevPage()">
+                上一页
+            </button>
+            <span>第{{currentPage}}页/共{{totalPage}}页</span>
+            <button @click="nextPage()">
+                下一页
+            </button>
+        </footer>
+  </el-col>
+</section>
 </template>
 
 <script>
 
-let data = () => {
-  return {
-    filters: {},
-    rows: []
-    
-  }
+let productList = [];
+for (let i = 0; i < 99; i++) {
+    productList.push({
+        name: '王小虎',
+    title: 'hhh',
+    date: '2018-05-02',
+    date2: '2018-07-04',
+    process: '50%',
+    content: 'hhhhhh'
+    });
+
 }
 
-let handleAdd = function() {
-
-}
-
-let handleEdit = function(index, row) {
-  console.log(index, row);
-}
-
-let handleDelete = function(index, row) {
-  console.log(index, row);
-}
-
-let getRows = function() {
-  this.rows = []
-  this.rows.push({
-    name: '王小虎',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎1',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎1',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎1',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎1',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎1',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎1',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎1',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎1',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎13',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎12',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎11',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-  this.rows.push({
-    name: '王小虎10',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-}
 export default {
-  data: data,
-  methods: {
-    //添加
-    handleAdd,
-    //修改
-    handleEdit,
-    //删除
-    handleDelete,
-    //获取分页
-    getRows
-  },
+  data() {
+        return {
+            productList, //所有数据
+            totalPage: 1, // 统共页数，默认为1
+            currentPage: 1, //当前页数 ，默认为1
+            pageSize: 10, // 每页显示数量
+            currentPageData: [], //当前页显示内容
+            rows: []
+        };
+    },
   mounted: function() {
-    this.getRows()
-  }
+    this.getRows(),
+    this.totalPage = Math.ceil(this.productList.length / this.pageSize);
+    // 计算得0时设置为1
+    this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
+    this.getCurrentPageData();
+  },
+  methods: {
+    // 设置当前页面数据，对数组操作的截取规则为[0~9],[10~20]...,
+    // 当currentPage为1时，我们显示(0*pageSize+1)-1*pageSize，当currentPage为2时，我们显示(1*pageSize+1)-2*pageSize...
+     getRows () {
+       let begin = (this.currentPage - 1) * this.pageSize;
+       let end = this.currentPage * this.pageSize;
+       this.rows = this.productList.slice(begin,end);
+       
+     },
+     //上一页
+     prevPage() {
+        console.log(this.currentPage);
+        if (this.currentPage == 1) {
+            return false;
+      } else {
+            this.currentPage--;
+            this.getCurrentPageData();
+     }
+  },
+ // 下一页
+     nextPage() {
+     if (this.currentPage == this.totalPage) {
+        return false;
+     } else {
+     this.currentPage++;
+     this.getCurrentPageData();
+    }
+  },
+  open() {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
+      
+    /*submit(){
+       this.$prompt('请输入邮箱', '编辑', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+        }).then(({ value }) => {
+          this.$message({
+            type: 'success',
+            message: '你的邮箱是: ' + value
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          });       
+        });
+*/
+    }
 
 }
+  
+}
+
 </script>
