@@ -10,6 +10,10 @@ import 'font-awesome/css/font-awesome.min.css'
  
 import ElementUI from 'element-ui'
 import './assets/theme/element-#2A5F95/index.css'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios,axios);
 Vue.use(ElementUI)
  
 

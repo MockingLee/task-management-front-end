@@ -2,7 +2,7 @@
   "name": "management_system",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "",
+  "author": "wxmwxmwxm <45595260+wxmwxmwxm@users.noreply.github.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -14,11 +14,11 @@
     "element-ui": "^2.8.2",
     "font-awesome": "^4.7.0",
     "vue": "^2.5.2",
+    "vue-axios": "^2.1.4",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
-    "axios-mock-adapter": "^1.16.0",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.1",

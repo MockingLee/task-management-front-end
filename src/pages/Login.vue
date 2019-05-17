@@ -1,42 +1,39 @@
 <template>
-<section>
-  <!--页眉-->
-  <el-header class="header">
-    <el-row>         
+  <section>
+    <!--页眉-->
+    <el-header class="header">
+      <el-row>
         <span style="font-size:25px;font-family:courier"> 任务管理系统</span>
-    </el-row>
-  </el-header>
-  <el-main>
-    <el-form 
-      :model="LoginForm" 
-      ref="LoginForm" 
-      :rules="rule"
-      label-width="0"
-      class="login-form">
-      <h3>用户登录系统</h3>
+      </el-row>
+    </el-header>
+    <el-main>
+      <el-form :model="LoginForm"
+               ref="LoginForm"
+               :rules="rule"
+               label-width="0"
+               class="login-form">
+        <h3>用户登录系统</h3>
 
-      <el-form-item prop="username">
-        <el-input 
-          type="text" 
-          v-model="LoginForm.username" 
-          placeholder="username" >
-        </el-input>
-      </el-form-item>
+        <el-form-item prop="username">
+          <el-input type="text"
+                    v-model="LoginForm.username"
+                    placeholder="username">
+          </el-input>
+        </el-form-item>
 
-      <el-form-item prop="password">
-        <el-input 
-          type="password" 
-          v-model="LoginForm.password" 
-          placeholder="password" >
-        </el-input>
-      </el-form-item>
+        <el-form-item prop="password">
+          <el-input type="password"
+                    v-model="LoginForm.password"
+                    placeholder="password">
+          </el-input>
+        </el-form-item>
 
       <el-form-item class="setBtn">
         <el-button 
           type="danger" 
           class="submitBtn"
           round
-          @click.native.prevent="submit"
+          @click="submitForm('LoginForm')"
           :loading="logining">
           登录
         </el-button>
@@ -54,6 +51,8 @@
 </template>
 
 <script>
+import api from '../axios'
+
 export default {
   // ....
   data () {
@@ -68,7 +67,7 @@ export default {
           {
             required: true,
             max: 14,
-            min: 7,
+            min: 3,
             message: '用户名长度为7-14位',
             trigger: 'blur'
           }
@@ -85,11 +84,33 @@ export default {
   },
   methods: {
     // ...
-    submit () {
+    submitForm () {
       this.$refs.LoginForm.validate(valid => {
         if (valid) {
           this.logining = true
           console.log('开始请求后台数据，验证返回之类的操作！')
+          let opt = this.LoginForm;
+          api.UserLogin(opt).then(({
+            data
+          }) => {
+            console.log(data)
+            if (data.success) {
+               this.$message({
+                                type: 'success',
+                                message: '登录成功'
+                            })
+                            localStorage.setItem('token', JSON.stringify(data.info))
+                            
+                            location.replace('/index')
+            }else {
+              this.$message({
+                                type: 'info',
+                                message: '登录失败'
+                            })
+                            this.logining = false
+            }
+          })
+          
         } else {
           console.log('submit err')
         }
@@ -120,7 +141,6 @@ $header-height: 60px;
   background: #fff;
   box-shadow: 0 0 35px rgb(9, 28, 65);
   padding: 50px 50px 30px 50px;
-  
 }
 .setBtn {
   position: absolute;
@@ -129,28 +149,26 @@ $header-height: 60px;
 }
 .submitBtn {
   width: 100px;
-  background:#0b0a3e;
+  background: #0b0a3e;
   border: 0px;
 }
 .resetBtn {
   width: 100px;
-  background:dimgray;
+  background: dimgray;
   border: 0px;
 }
 .header {
-        background-color: $background-color;
-        color: $header-color;
-        text-align: center;
-        line-height: $header-height;
-        padding: 0;
+  background-color: $background-color;
+  color: $header-color;
+  text-align: center;
+  line-height: $header-height;
+  padding: 0;
 
-        .header-title {
-            text-align: left;
-            span {
-                padding: 0 20px;
-            }
-        }
+  .header-title {
+    text-align: left;
+    span {
+      padding: 0 20px;
+    }
+  }
 }
-
-
 </style>
