@@ -86,6 +86,8 @@ export default {
     //获取分页
 
     loadUsers () {
+      this.rows = []
+      this.loading = true
       let opt = JSON.parse(localStorage.token)
       if (opt) {
         api.getUsers(JSON.stringify({
@@ -142,29 +144,32 @@ export default {
         inputErrorMessage: '请输入3-14数字或字母'
       }).then(({ value }) => {
         console.log(value)
+        let opt = JSON.parse(localStorage.token)
         api.addUser(JSON.stringify({
           "info": opt,
-          'msg': JSON.stringify({
+          "msg": JSON.parse(JSON.stringify({
             "username": value,
-            "weight": 0
-          })
+            "weight": 0,
+          }))
         })).then(({
           data
         }) => {
           console.log(data)
+          if (data.success) {
+            this.$alert('初始密码: ' + data.initPass, '创建成功', {
+              confirmButtonText: '确定',
+              callback: action => {
+                this.loadUsers()
+              }
+            });
+          }
         })
+
         this.$message({
           type: 'success',
           message: '姓名为: ' + value,
         });
-        this.rows.push({
-          name: value,
-          title: '',
-          date: '',
-          date2: '',
-          process: '',
-          content: ''
-        })
+
       }).catch(() => {
         this.$message({
           type: 'info',
