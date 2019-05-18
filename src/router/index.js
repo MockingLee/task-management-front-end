@@ -3,7 +3,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/pages/Login'
 import Dashboard from '@/pages/Dashboard'
-import index from '@/pages/index'
+import searchUser from '@/pages/searchUser'
 import page from '@/pages/page'
 
 Vue.use(Router)
@@ -33,9 +33,9 @@ var router = new Router({
           component: resolve => require(['../pages/page'], resolve)
         },
         {
-          path: '/index',
-          name: '/index',
-          component: resolve => require(['../pages/index'], resolve)
+          path: '/searchUser',
+          name: '/searchUser',
+          component: resolve => require(['../pages/searchUser'], resolve)
         },
         {
           path: '/add',

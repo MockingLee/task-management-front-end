@@ -21,7 +21,7 @@
                     <el-menu-item index="1-1">用户管理</el-menu-item>
                   </center>
                 </router-link>
-                <router-link to='/index'>
+                <router-link to='/searchUser'>
                   <center>
                     <el-menu-item index="1-2">查询用户</el-menu-item>
                   </center>
