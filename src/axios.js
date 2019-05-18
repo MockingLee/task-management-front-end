@@ -18,7 +18,6 @@ export default {
   },
   // 添加用户
   addUser (data) {
-    console.log("add")
     return instance.post('/api/addAccount', data)
   },
   // 用户登录
