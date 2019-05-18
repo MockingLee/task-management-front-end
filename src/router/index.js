@@ -5,7 +5,10 @@ import Login from '@/pages/Login'
 import Dashboard from '@/pages/Dashboard'
 import searchUser from '@/pages/searchUser'
 import page from '@/pages/page'
-
+import UserMain from '@/pages/UserMain'
+import UserTask from '@/pages/UserTask'
+import UserSearchTask from '@/pages/UserSearchTask'
+import UserChaTask from '@/pages/UserChaTask'
 Vue.use(Router)
 
 
@@ -42,6 +45,28 @@ var router = new Router({
           name: '/add',
           component: resolve => require(['../pages/add'], resolve)
         }
+      ]
+    },
+    {
+      path: '/UserMain',
+      name: 'UserMain',
+      component: resolve => require(['../pages/UserMain'], resolve),
+      children: [
+        {
+          path: '/',
+          name: '/UserTask',
+          component: resolve => require(['../pages/UserTask'], resolve)
+        },
+        {
+          path: '/UserSearchTask',
+          name: '/UserSearchTask',
+          component: resolve => require(['../pages/UserSearchTask'], resolve)
+        },
+        {
+          path: '/UserChaTask',
+          name: '/UserChaTask',
+          component: resolve => require(['../pages/UserChaTask'], resolve)
+        },
       ]
     },
     // {

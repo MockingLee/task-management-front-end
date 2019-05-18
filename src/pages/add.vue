@@ -1,6 +1,7 @@
 <template>
   <section>
-    <el-table :data="rows"
+    <!--<el-table :data="rows"-->
+      <el-table :data="rows"
               style="width: 100%"
               stripe
               border
@@ -58,8 +59,17 @@
           <span size="medium">{{ scope.row.birth }}</span>
         </template>
       </el-table-column>
-
+        
     </el-table>
+     <footer>
+            <button @click="prevPage()">
+                上一页
+            </button>
+            <span>第{{currentPage}}页/共{{totalPage}}页</span>
+            <button @click="nextPage()">
+                下一页
+            </button>
+        </footer>
     <br>
     <el-button size="mini"
                type="primary"
@@ -70,21 +80,55 @@
 </template>
 <script>
 
-let data = () => {
+/*let data = () => {
   return {
     filters: {},
     rows: [],
     loading: true
 
   }
-}
-
+  }*/
+let loadUsers = function(){}
 import api from '../axios'
 export default {
-  data: data,
+ // data: data,
+   data ()  {
+        return {
+         // data,
+            //productList,//所有数据
+           //filters: {},
+           rows:[],          
+            totalPage: 1, // 统共页数，默认为1
+            currentPage: 1, //当前页数 ，默认为1
+           pageSize: 5, // 每页显示数量           
+            currentPageData: [], //当前页显示内容   
+            loading: true       
+        };
+    },  
+    mounted() {
+    this.loadUsers()
+    this.getCurrentPageData(),
+        // 计算一共有几页
+        // this.getCurrentPageData();
+       // this.totalPage = Math.ceil(this.data.length / this.pageSize);
+        this.totalPage = Math.ceil(this.rows.length / this.pageSize);
+        // 计算得0时设置为1
+        this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
+  },
+
   methods: {
     //获取分页
-
+// 设置当前页面数据，对数组操作的截取规则为[0~9],[10~20]...,
+        // 当currentPage为1时，我们显示(0*pageSize+1)-1*pageSize，当currentPage为2时，我们显示(1*pageSize+1)-2*pageSize...
+        getCurrentPageData() {
+            let begin = (this.currentPage - 1) * this.pageSize;
+            let end = this.currentPage * this.pageSize;
+            this.currentPageData = this.rows.slice(
+               begin,                  
+              end
+            );        
+        },
+//loadUsers,
     loadUsers () {
       this.rows = []
       this.loading = true
@@ -177,13 +221,28 @@ export default {
         });
       });
     },
-
-
+//loadUsers,
+        //上一页
+        prevPage() {
+            console.log(this.currentPage);
+            if (this.currentPage == 1) {
+                return false;
+            } else {
+                this.currentPage--;
+                this.getCurrentPageData();
+            }
+        },
+        // 下一页
+        nextPage() {
+            if (this.currentPage == this.totalPage) {
+                return false;
+            } else {
+                this.currentPage++;
+                this.getCurrentPageData();
+            }
+        }
   },
-  mounted: function () {
-    this.loadUsers()
-
-  }
-
+  //mounted: function () {
+    
 }
 </script>
