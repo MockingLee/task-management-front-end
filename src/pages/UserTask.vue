@@ -200,6 +200,32 @@ export default {
   },
 
   methods: {
+    handleUpdate (data) {
+      this.$prompt('更新进度', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputPattern: /^([0-9]\d?|100)$/,
+        inputErrorMessage: '请输入0-100'
+      }).then(({ value }) => {
+        let opt = JSON.stringify({
+          "info": JSON.parse(localStorage.token),
+          "tid": data.tid,
+          "msg": JSON.parse(JSON.stringify({
+            "process": value
+          }))
+        })
+        api.updateTask(opt)
+        this.$message({
+          type: 'success',
+          message: 更新成功
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });
+      });
+    },
     submitEdit (data) {
       let opt = JSON.stringify({
         "info": JSON.parse(localStorage.token),

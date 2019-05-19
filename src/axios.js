@@ -46,7 +46,11 @@ export default {
   },
   // 修改任务
   editTask (data) {
-    return instance.post('/api/changeTask')
+    return instance.post('/api/changeTask', data)
+  },
+  // 更新进度
+  updateTask (data) {
+    return instance.post('/api/updateTask', data)
   }
 
 }
