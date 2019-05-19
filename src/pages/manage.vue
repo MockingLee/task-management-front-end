@@ -102,18 +102,6 @@ let handleEdit = function (index, row) {
 let handleDelete = function (index, row) {
   console.log(index, row);
 }
-
-let getRows = function () {
-  this.rows = []
-  this.rows.push({
-    name: '王小虎',
-    title: 'hhh',
-    date: '2018-05-02',
-    date2: '2018-07-04',
-    process: '50%',
-    content: 'hhhhhh'
-  })
-}
 import api from '../axios'
 export default {
   data: data,

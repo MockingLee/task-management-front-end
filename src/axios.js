@@ -24,12 +24,29 @@ export default {
   UserLogin (data) {
     return instance.post('/api/login', data)
   },
-  // 获取用户
-  getUser () {
-    return instance.get('/api/user')
+  // 查询用户
+  getUser (data) {
+    return instance.post('/api/getUser', data)
   },
   // 删除用户
   delUser (data) {
     return instance.post('/api/delUser', data)
+  },
+  // 修改用户信息
+  editInfo (data) {
+    return instance.post('/api/changeInfo', data)
+  },
+  // 获取用户所有任务
+  getUserAllTasks (data) {
+    return instance.post('/api/getUserAllTask', data)
+  },
+  // 新建任务
+  addTask (data) {
+    return instance.post('/api/addTask', data)
+  },
+  // 修改任务
+  editTask (data) {
+    return instance.post('/api/changeTask')
   }
+
 }

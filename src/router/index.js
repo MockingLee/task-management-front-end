@@ -48,7 +48,7 @@ var router = new Router({
       ]
     },
     {
-      path: '/UserMain',
+      path: '/usermain',
       name: 'UserMain',
       component: resolve => require(['../pages/UserMain'], resolve),
       children: [
@@ -58,14 +58,14 @@ var router = new Router({
           component: resolve => require(['../pages/UserTask'], resolve)
         },
         {
+          path: '/UserTask',
+          name: '/UserTask',
+          component: resolve => require(['../pages/UserTask'], resolve)
+        },
+        {
           path: '/UserSearchTask',
           name: '/UserSearchTask',
           component: resolve => require(['../pages/UserSearchTask'], resolve)
-        },
-        {
-          path: '/UserChaTask',
-          name: '/UserChaTask',
-          component: resolve => require(['../pages/UserChaTask'], resolve)
         },
       ]
     },
@@ -84,6 +84,12 @@ var router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.path !== '/Login' && !localStorage.token) {
+    return next('/Login')
+  }
+  if (to.path == '/usermain' && JSON.parse(localStorage.token).weight != 0) {
+    return next('/Login')
+  }
+  if (to.path == '/manage' && JSON.parse(localStorage.token).weight != 1) {
     return next('/Login')
   }
   next()

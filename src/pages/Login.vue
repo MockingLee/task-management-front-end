@@ -28,26 +28,24 @@
           </el-input>
         </el-form-item>
 
-      <el-form-item class="setBtn">
-        <el-button 
-          type="danger" 
-          class="submitBtn"
-          round
-          @click="submitForm('LoginForm')"
-          :loading="logining">
-          登录
-        </el-button>
-        <el-button 
-          type="primary"
-          class="resetBtn" 
-          round
-          @click.native.prevent="reset">
-          重置
-        </el-button>       
-      </el-form-item>
-    </el-form>
-  </el-main>
-</section>
+        <el-form-item class="setBtn">
+          <el-button type="danger"
+                     class="submitBtn"
+                     round
+                     @click="submitForm('LoginForm')"
+                     :loading="logining">
+            登录
+          </el-button>
+          <el-button type="primary"
+                     class="resetBtn"
+                     round
+                     @click.native.prevent="reset">
+            重置
+          </el-button>
+        </el-form-item>
+      </el-form>
+    </el-main>
+  </section>
 </template>
 
 <script>
@@ -95,22 +93,27 @@ export default {
           }) => {
             console.log(data)
             if (data.success) {
-               this.$message({
-                                type: 'success',
-                                message: '登录成功'
-                            })
-                            localStorage.setItem('token', JSON.stringify(data.info))
-                            
-                            location.replace('/index')
-            }else {
               this.$message({
-                                type: 'info',
-                                message: '登录失败'
-                            })
-                            this.logining = false
+                type: 'success',
+                message: '登录成功'
+              })
+
+              localStorage.setItem('token', JSON.stringify(data.info))
+              console.log(JSON.stringify(data.info).weight)
+
+              if (JSON.parse(JSON.stringify(data.info)).weight == 0)
+                location.replace('/usermain')
+              else if (JSON.parse(JSON.stringify(data.info)).weight == 1)
+                location.replace('/manage')
+            } else {
+              this.$message({
+                type: 'info',
+                message: '登录失败'
+              })
+              this.logining = false
             }
           })
-          
+
         } else {
           console.log('submit err')
         }
