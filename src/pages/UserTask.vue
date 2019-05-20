@@ -214,11 +214,19 @@ export default {
             "process": value
           }))
         })
-        api.updateTask(opt)
-        this.$message({
-          type: 'success',
-          message: 更新成功
-        });
+        api.updateTask(opt).then(({
+          data
+        }) => {
+          if (data.success) {
+            this.$message({
+              type: 'success',
+              message: "更新成功"
+            });
+            this.loadTasks()
+          }
+
+        })
+
       }).catch(() => {
         this.$message({
           type: 'info',

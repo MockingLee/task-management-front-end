@@ -246,7 +246,22 @@ export default {
       this.dialogFormVisible = true
     },
     handleDelete (data) {
-      console.log(data)
+      let opt = JSON.stringify({
+        "info": JSON.parse(localStorage.token),
+        "msg": JSON.parse(JSON.stringify({
+          "uid": data.uid
+        }))
+      })
+      api.delUser(opt).then(({
+        data
+      }) => {
+        if (data.success) {
+          this.$message({
+            type: "success",
+            message: "删除成功"
+          })
+        }
+      })
     },
     searchUser () {
       let opt = JSON.stringify({

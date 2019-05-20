@@ -193,7 +193,7 @@ export default {
         }) => {
           console.log(data)
           if (data.success) {
-            this.$alert('初始密码: ' + data.initPass, '创建成功', {
+            this.$alert('初始密码: ' + data.password, '创建成功', {
               confirmButtonText: '确定',
               callback: action => {
                 this.loadUsers()

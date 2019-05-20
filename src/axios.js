@@ -30,7 +30,7 @@ export default {
   },
   // 删除用户
   delUser (data) {
-    return instance.post('/api/delUser', data)
+    return instance.post('/api/delAccount', data)
   },
   // 修改用户信息
   editInfo (data) {

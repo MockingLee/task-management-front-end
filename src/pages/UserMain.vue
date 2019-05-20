@@ -54,10 +54,7 @@
                   {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>黄金糕</el-dropdown-item>
-                  <el-dropdown-item>狮子头</el-dropdown-item>
-                  <el-dropdown-item>螺蛳粉</el-dropdown-item>
-                  <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+                  <el-dropdown-item disabled>UID : {{uid}}</el-dropdown-item>
                   <el-dropdown-item divided><span v-on:click="logout">
                       <i class="fa fa-sign-out">登出</i>
                     </span></el-dropdown-item>
@@ -86,7 +83,8 @@ let data = () => {
     userName: JSON.parse(localStorage.token).username,
     filters: {},
     rows: [],
-    allUsers: []
+    allUsers: [],
+    uid: JSON.parse(localStorage.token).uid,
 
   }
 }
