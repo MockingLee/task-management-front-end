@@ -55,7 +55,7 @@
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item disabled>UID : {{uid}}</el-dropdown-item>
-                  <el-dropdown-item divided><span v-on:click="logout">
+                  <el-dropdown-item divided v-on:click.native="logout"><span>
                       <i class="fa fa-sign-out">登出</i>
                     </span></el-dropdown-item>
                 </el-dropdown-menu>
