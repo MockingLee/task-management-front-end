@@ -72,6 +72,9 @@
                      type="primary"
                      @click="handleEdit(scope.row)">编辑</el-button>
           <el-button size="mini"
+                     type="primary"
+                     @click="handlePass(scope.row)">更改密码</el-button>
+          <el-button size="mini"
                      type="danger"
                      @click="handleDelete(scope.row)">删除</el-button>
         </template>
@@ -131,6 +134,31 @@
                    @click="submitEdit(form)">确 定</el-button>
       </div>
     </el-dialog>
+
+    <el-dialog title="修改密码"
+               :visible.sync="changePassVisible"
+               v-loading="loading">
+      <el-form :model="editForm"
+               ref="form">
+        <el-form-item label="uid"
+                      :label-width="formLabelWidth">
+          <el-input v-model="editForm.uid"
+                    autocomplete="off"
+                    :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="更改后密码"
+                      :label-width="formLabelWidth">
+          <el-input v-model="editForm.password"
+                    autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer"
+           class="dialog-footer">
+        <el-button @click="changePassVisible = false">取 消</el-button>
+        <el-button type="primary"
+                   @click="submitPass(editForm)">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 
 </template>
@@ -185,6 +213,8 @@ export default {
 
       input2: '',
       rows: [],
+      editForm: [],
+      changePassVisible: false,
       loading: false,
       rules: {
         input2: [
@@ -232,6 +262,14 @@ export default {
         }
       })
     },
+    handlePass (data) {
+      console.log(data.uid)
+      this.editForm = {
+        uid: data.uid,
+        password: ''
+      }
+      this.changePassVisible = true
+    },
     handleEdit (data) {
       console.log(data)
       this.form = {
@@ -260,6 +298,35 @@ export default {
             type: "success",
             message: "删除成功"
           })
+        }
+      })
+    },
+    submitPass (data) {
+      let opt = JSON.stringify({
+        "info": JSON.parse(localStorage.token),
+        "uid": JSON.parse(data.uid),
+        "msg": JSON.parse(JSON.stringify({
+          "password": data.password
+        }))
+      })
+      console.log(opt)
+      api.changePass(opt).then(({
+        data
+      }) => {
+        this.changePassVisible = false
+        if (data.success) {
+          this.$message({
+            message: '更改密码成功',
+            type: 'success'
+          });
+          if(data.islogout){
+            location.replace('/Login')
+          }
+        }else{
+          this.$message({
+            message: '更改密码失败',
+            type: 'info'
+          });
         }
       })
     },

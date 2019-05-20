@@ -280,7 +280,7 @@ export default {
             message: '删除成功',
             type: 'success'
           })
-          this.loadTasks
+          this.loadTasks()
         }else{
           this.$message({
             message: '删除失败',

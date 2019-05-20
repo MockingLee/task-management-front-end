@@ -55,6 +55,10 @@ export default {
   // 删除任务
   delTask (data) {
 	  return instance.post('/api/delTask', data)
+  },
+  // 管理员更改密码
+  changePass (data) {
+	  return instance.post('/api/changePass', data)
   }
 
 }
