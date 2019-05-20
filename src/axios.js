@@ -51,6 +51,10 @@ export default {
   // 更新进度
   updateTask (data) {
     return instance.post('/api/updateTask', data)
+  },
+  // 删除任务
+  delTask (data) {
+	  return instance.post('/api/delTask', data)
   }
 
 }

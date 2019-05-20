@@ -70,7 +70,7 @@
                   </el-button>
                   <el-button size="mini"
                              type="danger"
-                             @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                             @click="handleDelete(scope.row)">删除</el-button>
                 </template>
               </el-table-column>
 
@@ -258,6 +258,27 @@ export default {
       }
       this.editDialogFormVisible = true
 
+    },
+    handleDelete (data) {
+      console.log(data.tid)
+      let opt = JSON.stringify({
+          "info": JSON.parse(localStorage.token),
+          "tid": data.tid,
+        })
+      api.delTask(opt).then(({data}) => {
+        this.loading = false
+        if (data.success) {
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          })
+        }else{
+          this.$message({
+            message: '删除失败',
+            type: 'info'
+          })
+        }
+      })
     },
     submitNewTask (data) {
       let opt = JSON.stringify({
